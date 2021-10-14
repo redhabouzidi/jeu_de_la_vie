@@ -1,2 +1,0 @@
-# Jeu de la vie
-
