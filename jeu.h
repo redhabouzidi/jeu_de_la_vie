@@ -6,8 +6,8 @@
 // dans le calcul des voisins avec bords cycliques
 static inline int modulo(int i, int m) {return (i+m)%m;}
 //Fonction vieillissement
-void vieillir_cel(int l,int c,grille* g);
-void vieillir_cel_null(int l,int c,grille* g);
+void vieillir_cel(grille* g);
+void vieillir_cel_null(grille* g);
 // compte le nombre de voisins vivants de la cellule (i,j)
 // les bords sont cycliques.
 int compte_voisins_vivants (int i, int j, grille g);

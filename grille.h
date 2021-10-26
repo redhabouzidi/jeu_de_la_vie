@@ -26,6 +26,6 @@ static inline int est_vivante(int i, int j, grille g){return g.cellules[i][j] !=
 // recopie gs dans gd (sans allocation)
 void copie_grille (grille gs, grille gd);
 int (*voisin) (int, int, grille);
-void (*fage)(int,int,grille*);
+void (*fage)(grille*);
 int ageevo;
 #endif

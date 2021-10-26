@@ -12,16 +12,19 @@ int compte_voisins_vivants (int i, int j, grille g){
 
 	return v;
 }
-void vieillir_cel(int l,int c,grille* g){
-
+void vieillir_cel(grille* g){
+int l,c;
+    for(l=0;l<g->nbl;l++){
+            for(c=0;c<g->nbc;c++){
 		    if(g->cellules[l][c]>0){
                 g->cellules[l][c]++;
 		    }if(g->cellules[l][c]==10){
                 g->cellules[l][c]=0;
 		    }
-
+		    }
+        }
 }
-void vieillir_cel_null(int l,int c,grille* g){
+void vieillir_cel_null(grille* g){
 }
 int compte_voisins_vivants_nc (int i, int j, grille g){
 	int v = 0, l=g.nbl, c = g.nbc;
@@ -88,12 +91,13 @@ void evolue (grille *g, grille *gc){
 
 	copie_grille (*g,*gc); // copie temporaire de la grille
 	int i,j,l=g->nbl, c = g->nbc,v;
+
 	for (i=0; i<l; i++)
 	{
 		for (j=0; j<c; ++j)
 		{
 
-		    (*fage)(i,j,g);
+
 			v = (*voisin)(i, j, *gc);
 			if (est_vivante(i,j,*g))
 			{ // evolution d'une cellule vivante
@@ -105,5 +109,6 @@ void evolue (grille *g, grille *gc){
 			}
 		}
 	}
+	(*fage)(g);
 	return;
 }

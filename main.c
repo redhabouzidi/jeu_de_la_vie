@@ -16,7 +16,7 @@ int main (int argc, char ** argv) {
     voisin=&compte_voisins_vivants;
     fage=vieillir_cel_null;
 	grille g, gc;
-	init_grille_from_file("grille1.txt",&g);
+	init_grille_from_file("grille4.txt",&g);
 	alloue_grille (g.nbl, g.nbc, &gc);
 
 	affiche_grille(g);
