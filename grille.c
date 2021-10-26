@@ -11,7 +11,6 @@ void init_grille_from_file (char * filename, grille* g){
 	fscanf(pfile, "%d", & c);
 
 	alloue_grille(l,c,g);
-
 	fscanf(pfile, "%d", & vivantes);
 	for (n=0; n< vivantes; ++n){
 		fscanf(pfile, "%d", & i);
@@ -31,20 +30,25 @@ void copie_grille (grille gs, grille gd){
 }
 void alloue_grille(int l,int c, grille *g){
     int i,j;
-for ( i=0;i<=g->nbl;i++){
-    for( j=0;j<=g->nbc;j++){
-    g->cellules[i]=malloc(sizeof(int)*g->nbc);
+    g->nbc=c;
+    g->nbl=l;
+    g->cellules=malloc(sizeof(int*)*(l));
+for ( i=0;i<g->nbl;i++){
+    g->cellules[i]=malloc(sizeof(int*)*c);
+    for( j=0;j<g->nbc;j++){
     g->cellules[i][j]=0;
     }
 }
 }
 void libere_grille (grille* g){
-int i,j;
-    for( i=0;i<g->nbl;i++){
-        for( j=0;j<g->nbc;j++){
-            free(g->cellules);
-        }
+int i;
+
+    for(i=0;i<g->nbl;i++){
+        free(g->cellules[i]);
     }
+    g->nbc=0;
+    g->nbl=0;
+    free(g->cellules);
 }
 
 

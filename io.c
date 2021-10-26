@@ -1,5 +1,4 @@
 #include "io.h"
-
 void affiche_trait (int c){
 	int i;
 	for (i=0; i<c; ++i) printf ("|---");
@@ -9,47 +8,78 @@ void affiche_trait (int c){
 
 void affiche_ligne (int c, int* ligne){
 	int i;
-	for (i=0; i<c; ++i) 
-		if (ligne[i] == 0 ) printf ("|   "); else printf ("| O ");
+	for (i=0; i<c; ++i){
+		if (ligne[i] == 0 ){
+            printf ("|   ");
+        } else {
+
+            printf ("| O ");
+        }
+	}
+	printf("|\n");
+	for (i=0; i<c; ++i){
+		if (ligne[i] == 0 ){
+            printf ("|   ");
+        } else {
+
+            printf ("| %d ",ligne[i]-1);
+        }
+	}
 	printf("|\n");
 	return;
 }
 
 void affiche_grille (grille g){
 	int i, l=g.nbl, c=g.nbc;
+	printf("\nAge grille:%d",ageevo);
 	printf("\n");
 	affiche_trait(c);
 	for (i=0; i<l; ++i) {
 		affiche_ligne(c, g.cellules[i]);
 		affiche_trait(c);
-	}	
-	printf("\n"); 
+	}
+	printf("\n");
 	return;
 }
-
 void efface_grille (grille g){
-	printf("\n\e[%dA",g.nbl*2 + 5); 
+	printf("\n\e[%dA",g.nbl*2 + 5);
 }
 
 void debut_jeu(grille *g, grille *gc){
-	char c = getchar(); 
+	char c = getchar();
 	while (c != 'q') // touche 'q' pour quitter
-	{ 
+	{
 		switch (c) {
-			case '\n' : 
+			case '\n' :
 			{ // touche "entree" pour évoluer
 				evolue(g,gc);
+				ageevo++;
 				efface_grille(*g);
 				affiche_grille(*g);
 				break;
 			}
-			default : 
+			case 'c':{
+                if(voisin==&compte_voisins_vivants){
+                    voisin=&compte_voisins_vivants_nc;
+                }else{
+                voisin=&compte_voisins_vivants;
+                }
+                break;
+			}
+			case 'v':{
+                if(fage==vieillir_cel_null){
+                    fage=&vieillir_cel;
+                }else{
+                fage=vieillir_cel_null;
+                }
+			}
+			default :
 			{ // touche non traitée
 				printf("\n\e[1A");
 				break;
 			}
 		}
-		c = getchar(); 
+		c = getchar();
 	}
-	return;	
+	return;
 }
