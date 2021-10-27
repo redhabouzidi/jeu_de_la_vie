@@ -17,6 +17,7 @@ void affiche_ligne (int c, int* ligne){
         }
 	}
 	printf("|\n");
+	if(fage!=NULL){
 	for (i=0; i<c; ++i){
 		if (ligne[i] == 0 ){
             printf ("|   ");
@@ -26,6 +27,8 @@ void affiche_ligne (int c, int* ligne){
         }
 	}
 	printf("|\n");
+	}
+
 	return;
 }
 
@@ -67,10 +70,10 @@ void debut_jeu(grille *g, grille *gc){
                 break;
 			}
 			case 'v':{
-                if(fage==vieillir_cel_null){
+                if(fage==NULL){
                     fage=&vieillir_cel;
                 }else{
-                fage=vieillir_cel_null;
+                fage=NULL;
                 }
 			}
 			default :

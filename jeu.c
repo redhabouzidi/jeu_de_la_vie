@@ -109,6 +109,7 @@ void evolue (grille *g, grille *gc){
 			}
 		}
 	}
-	(*fage)(g);
+	if(fage!=NULL){
+	(*fage)(g);}
 	return;
 }

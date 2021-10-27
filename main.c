@@ -7,16 +7,15 @@
 
 
 int main (int argc, char ** argv) {
-    argc=2;
 	if (argc != 2 )
 	{
 		printf("usage : main <fichier grille>");
 		return 1;
 	}
     voisin=&compte_voisins_vivants;
-    fage=vieillir_cel_null;
+    fage=NULL;
 	grille g, gc;
-	init_grille_from_file("grille4.txt",&g);
+	init_grille_from_file(argv[1],&g);
 	alloue_grille (g.nbl, g.nbc, &gc);
 
 	affiche_grille(g);
