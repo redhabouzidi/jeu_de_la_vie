@@ -45,7 +45,7 @@ void affiche_grille (grille g){
 	return;
 }
 void efface_grille (grille g){
-	printf("\n\e[%dA",g.nbl*2 + 5);
+    system("cls");
 }
 
 void debut_jeu(grille *g, grille *gc){
@@ -67,6 +67,7 @@ void debut_jeu(grille *g, grille *gc){
                 }else{
                 voisin=&compte_voisins_vivants;
                 }
+                fflush(stdin);
                 break;
 			}
 			case 'v':{
@@ -75,6 +76,23 @@ void debut_jeu(grille *g, grille *gc){
                 }else{
                 fage=NULL;
                 }
+                fflush(stdin);
+                break;
+			}
+			case 'n':{
+			    ageevo=0;
+			    libere_grille(g);
+			    libere_grille(gc);
+
+            char string[15];
+            scanf("%s",string);
+			init_grille_from_file(string,g);
+			alloue_grille(g->nbl,g->nbc,gc);
+			system("cls");
+			affiche_grille(*g);
+			fflush(stdin);
+			break;
+
 			}
 			default :
 			{ // touche non traitée
