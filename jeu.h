@@ -8,6 +8,7 @@
 #include "grille.h"
 
 /**
+*\fn static inline int modulo(int i, int m)
 *\param i int
 *\param m int
 * \return int la valeure absolu de i modulo m

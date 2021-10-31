@@ -5,12 +5,13 @@
  */
 #include "grille.h"
 /**
+*\fn void init_grille_from_file (char * filename, grille* g)
 *\relatesalso grille
 *\param *filename char le nom du fichier
 *\param *g grille
 *\return \c void charge les valeur du fichier dans la grille
 */
-/** alloue et initalise la grille g à partir d'un fichier */
+/** alloue et initalise la grille g a partir d'un fichier */
 void init_grille_from_file (char * filename, grille* g){
 	FILE * pfile = NULL;
 	pfile = fopen(filename, "r");
@@ -34,6 +35,7 @@ void init_grille_from_file (char * filename, grille* g){
 }
 
 /**
+*\fn void copie_grille (grille gs, grille gd)
 *\relatesalso grille
 *\param *gs grille
 *\param *gd grille
@@ -50,11 +52,12 @@ void copie_grille (grille gs, grille gd){
 	return;
 }
 /**
+*\fn void alloue_grille(int l,int c, grille *g)
 *\relatesalso grille
 *\param l int nombre de lignes
 *\param c int nombre de colonnes
 *\param *g grille
-*\return \c void crée une grille initialisé a 0
+*\return \c void cree une grille initialise a 0
 */
 void alloue_grille(int l,int c, grille *g){
     int i,j;
@@ -69,9 +72,10 @@ for ( i=0;i<g->nbl;i++){
 }
 }
 /**
+*\fn void libere_grille (grille* g)
 *\relatesalso grille
 *\param *g grille
-*\return \c void libére la grille
+*\return \c void libere la grille
 */
 void libere_grille (grille* g){
 int i;

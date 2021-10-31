@@ -23,6 +23,7 @@ void libere_grille (grille* g);
 void init_grille_from_file (char * filename, grille* g);
 
 /**
+*\fn static inline void set_vivante(int i, int j, grille g)
 *\relatesalso grille
 *\param l int nombre de lignes
 *\param c int nombre de colonnes
@@ -31,6 +32,7 @@ void init_grille_from_file (char * filename, grille* g);
 */
 static inline void set_vivante(int i, int j, grille g){g.cellules[i][j] = 1;}
 /**
+*\fn static inline void set_morte(int i, int j, grille g)
 *\relatesalso grille
 *\param l int nombre de lignes
 *\param c int nombre de colonnes
@@ -39,6 +41,7 @@ static inline void set_vivante(int i, int j, grille g){g.cellules[i][j] = 1;}
 */
 static inline void set_morte(int i, int j, grille g){g.cellules[i][j] = 0;}
 /**
+*\fn static inline int est_vivante(int i, int j, grille g)
 *\relatesalso grille
 *\param l int nombre de lignes
 *\param c int nombre de colonnes
@@ -52,6 +55,6 @@ void copie_grille (grille gs, grille gd);
 int (*voisin) (int, int, grille);
 /** Variable globale permetant d'activer ou de désactiver le vieillissement */
 void (*fage)(grille*);
-/** Variable globale permetant d'incrementer le temps d'évolution */
+/** Variable globale permetant d'incrementer le temps d'evolution */
 int ageevo;
 #endif

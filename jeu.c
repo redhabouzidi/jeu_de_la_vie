@@ -5,6 +5,7 @@
  */
 #include "jeu.h"
 /**
+*\fn int compte_voisins_vivants (int i, int j, grille g)
 *\relatesalso grille
 *\param l int nombre de lignes
 *\param c int nombre de colonnes
@@ -26,9 +27,10 @@ int compte_voisins_vivants (int i, int j, grille g){
 	return v;
 }
 /**
+*\fn void vieillir_cel(grille* g)
 *\relatesalso grille
 *\param *g grille
-\return \c void incremente les cellules vivantes et les remets a 0 quand elles dépassent l'âge 8
+\return \c void incremente les cellules vivantes et les remets a 0 quand elles dépassent l'age 8
 */
 void vieillir_cel(grille* g){
 int l,c;
@@ -44,6 +46,7 @@ int l,c;
 }
 
 /**
+*\fn int compte_voisins_vivants_nc (int i, int j, grille g)
 *\relatesalso grille
 *\param l int nombre de lignes
 *\param c int nombre de colonnes
@@ -112,10 +115,11 @@ int compte_voisins_vivants_nc (int i, int j, grille g){
 }
 
 /**
+*\fn void evolue (grille *g, grille *gc)
 *\relatesalso grille
 *\param *gc grille copie
 *\param *g grille
-*\return \c void avancé dans l'âge de la grille
+*\return \c void avance dans l'age de la grille
 */
 void evolue (grille *g, grille *gc){
 

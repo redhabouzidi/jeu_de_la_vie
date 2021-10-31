@@ -10,6 +10,5 @@ main.o:io.h grille.h jeu.h main.c
 	gcc -c main.c
 make clean:
 	rm *.o
-
 make dist:
-	tar -jcvf archive.tar.xz grille.c grille.h main.c io.c io.h jeu.c jeu.h
+	tar -jcvf RedhaBouzidi-TP3-2.0.tar.xz grille.c grille.h main.c io.c io.h jeu.c jeu.h

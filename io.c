@@ -5,6 +5,7 @@
  */
 #include "io.h"
 /**
+*\fn void affiche_trait (int c)
 *\param c int nombre de colonnes
 return \c void affiche les traits du tableau
 */
@@ -15,6 +16,7 @@ void affiche_trait (int c){
 	return;
 }
 /**
+*\fn void affiche_ligne (int c, int* ligne)
 *\param l int nombre de lignes
 *\param ligne* int tableau d'entiers
 *\return \c void affiche les cellules vivantes ainsi que les lignes du tableau*/
@@ -44,6 +46,7 @@ void affiche_ligne (int c, int* ligne){
 	return;
 }
 /**
+*\fn void affiche_grille (grille g)
 *\relatesalso grille
 *\param g grille
 *\return \c void affiche la grille*/
@@ -65,6 +68,7 @@ void efface_grille (grille g){
     system("clear ");
 }
 /**
+*\fn void debut_jeu(grille *g, grille *gc)
 *\relatesalso grille
 *\param *gc grille copie
 *\param *g grille
