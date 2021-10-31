@@ -62,7 +62,7 @@ void affiche_grille (grille g){
 
 /** effacement d'une grille*/
 void efface_grille (grille g){
-    system("printf("\033c")");
+    system("clear ");
 }
 /**
 *\relatesalso grille
