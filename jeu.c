@@ -1,4 +1,17 @@
+/**
+ * \file jeu.c
+ * code pour la fonctionalité de jeu
+ *\author Redha Bouzidi
+ */
 #include "jeu.h"
+/**
+*\relatesalso grille
+*\param l int nombre de lignes
+*\param c int nombre de colonnes
+*\param *g grille
+*\return int compte le nombre de voisins vivants de la cellule (i,j)
+* les bords sont cycliques.
+*/
 int compte_voisins_vivants (int i, int j, grille g){
 	int v = 0, l=g.nbl, c = g.nbc;
 	v+= est_vivante(modulo(i-1,l),modulo(j-1,c),g);
@@ -12,6 +25,11 @@ int compte_voisins_vivants (int i, int j, grille g){
 
 	return v;
 }
+/**
+*\relatesalso grille
+*\param *g grille
+\return \c void incremente les cellules vivantes et les remets a 0 quand elles dépassent l'âge 8
+*/
 void vieillir_cel(grille* g){
 int l,c;
     for(l=0;l<g->nbl;l++){
@@ -24,8 +42,15 @@ int l,c;
 		    }
         }
 }
-void vieillir_cel_null(grille* g){
-}
+
+/**
+*\relatesalso grille
+*\param l int nombre de lignes
+*\param c int nombre de colonnes
+*\param *g grille
+*\return int compte le nombre de voisins vivants de la cellule (i,j)
+* les bords ne sont pas cycliques.
+*/
 int compte_voisins_vivants_nc (int i, int j, grille g){
 	int v = 0, l=g.nbl, c = g.nbc;
 	if(i+1==l){
@@ -86,7 +111,12 @@ int compte_voisins_vivants_nc (int i, int j, grille g){
 	return v;
 }
 
-
+/**
+*\relatesalso grille
+*\param *gc grille copie
+*\param *g grille
+*\return \c void avancé dans l'âge de la grille
+*/
 void evolue (grille *g, grille *gc){
 
 	copie_grille (*g,*gc); // copie temporaire de la grille

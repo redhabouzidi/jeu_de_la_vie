@@ -1,11 +1,23 @@
+/**
+ * \file io.c
+ * code pour l'affichage et les choix
+ *\author Redha Bouzidi
+ */
 #include "io.h"
+/**
+*\param c int nombre de colonnes
+return \c void affiche les traits du tableau
+*/
 void affiche_trait (int c){
 	int i;
 	for (i=0; i<c; ++i) printf ("|---");
 	printf("|\n");
 	return;
 }
-
+/**
+*\param l int nombre de lignes
+*\param ligne* int tableau d'entiers
+*\return \c void affiche les cellules vivantes ainsi que les lignes du tableau*/
 void affiche_ligne (int c, int* ligne){
 	int i;
 	for (i=0; i<c; ++i){
@@ -31,7 +43,10 @@ void affiche_ligne (int c, int* ligne){
 
 	return;
 }
-
+/**
+*\relatesalso grille
+*\param g grille
+*\return \c void affiche la grille*/
 void affiche_grille (grille g){
 	int i, l=g.nbl, c=g.nbc;
 	printf("\nAge grille:%d",ageevo);
@@ -44,10 +59,16 @@ void affiche_grille (grille g){
 	printf("\n");
 	return;
 }
+
+/** effacement d'une grille*/
 void efface_grille (grille g){
     system("cls");
 }
-
+/**
+*\relatesalso grille
+*\param *gc grille copie
+*\param *g grille
+*/
 void debut_jeu(grille *g, grille *gc){
 	char c = getchar();
 	while (c != 'q') // touche 'q' pour quitter
