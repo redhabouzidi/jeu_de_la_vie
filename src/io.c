@@ -34,7 +34,7 @@ void affiche_ligne (int c, int* ligne){
 	printf("|\n");
 	if(fage!=NULL){
 	for (i=0; i<c; ++i){
-		if (ligne[i] == 0 ){
+		if (ligne[i] == 0 || ligne[i]== -1 ){
             printf ("|   ");
         } else {
 
