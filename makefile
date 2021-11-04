@@ -12,6 +12,6 @@ main.o: include/io.h include/grille.h include/jeu.h src/main.c
 	cd obj
 	gcc -c -o obj/main.o src/main.c 
 make clean:
-	rm obj/*.o
+	rm obj/*.o bin/main
 make dist:
 	tar -jcvf RedhaBouzidi-TP3-2.0.tar.xz grille.c grille.h main.c io.c io.h jeu.c jeu.h
