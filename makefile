@@ -1,14 +1,17 @@
-main : grille.o io.o jeu.o main.o
-	gcc -o main grille.o io.o jeu.o main.o
-grille.o: grille.c grille.h 
-	gcc -c grille.c
-io.o: io.c io.h grille.h jeu.h 
-	gcc -c io.c
-jeu.o: jeu.c jeu.h grille.h 
-	gcc -c jeu.c
-main.o:io.h grille.h jeu.h main.c 
-	gcc -c main.c
+bin/main : grille.o io.o jeu.o main.o
+	gcc -o bin/main obj/grille.o obj/io.o obj/jeu.o obj/main.o 
+grille.o: src/grille.c include/grille.h 
+	gcc -c -o obj/grille.o src/grille.c 
+io.o: src/io.c include/io.h include/grille.h include/jeu.h 
+	cd obj
+	gcc -c -o obj/io.o src/io.c 
+jeu.o: src/jeu.c include/jeu.h include/grille.h 
+	cd obj
+	gcc -c -o obj/jeu.o src/jeu.c 
+main.o: include/io.h include/grille.h include/jeu.h src/main.c 
+	cd obj
+	gcc -c -o obj/main.o src/main.c 
 make clean:
-	rm *.o
+	rm obj/*.o
 make dist:
 	tar -jcvf RedhaBouzidi-TP3-2.0.tar.xz grille.c grille.h main.c io.c io.h jeu.c jeu.h

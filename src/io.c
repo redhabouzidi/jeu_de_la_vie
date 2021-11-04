@@ -3,7 +3,7 @@
  * code pour l'affichage et les choix
  *\author Redha Bouzidi
  */
-#include "io.h"
+#include "../include/io.h"
 /**
 *\fn void affiche_trait (int c)
 *\param c int nombre de colonnes
@@ -25,9 +25,10 @@ void affiche_ligne (int c, int* ligne){
 	for (i=0; i<c; ++i){
 		if (ligne[i] == 0 ){
             printf ("|   ");
-        } else {
-
-            printf ("| O ");
+        } else if(ligne [i]== -1){
+		printf ("| X ");
+        }else{
+		printf ("| O ");
         }
 	}
 	printf("|\n");

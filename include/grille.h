@@ -30,7 +30,7 @@ void init_grille_from_file (char * filename, grille* g);
 *\param *g grille
 *\return \c void met la case [i][j] a 1
 */
-static inline void set_vivante(int i, int j, grille g){g.cellules[i][j] = 1;}
+static inline void set_vivante(int i, int j, grille g){if(g.cellules[i][j]!=-1)g.cellules[i][j] = 1;}
 /**
 *\fn static inline void set_morte(int i, int j, grille g)
 *\relatesalso grille
@@ -39,7 +39,7 @@ static inline void set_vivante(int i, int j, grille g){g.cellules[i][j] = 1;}
 *\param *g grille
 *\return \c void met la case [i][j] a 0
 */
-static inline void set_morte(int i, int j, grille g){g.cellules[i][j] = 0;}
+static inline void set_morte(int i, int j, grille g){if(g.cellules[i][j]!=-1)g.cellules[i][j] = 0;}
 /**
 *\fn static inline int est_vivante(int i, int j, grille g)
 *\relatesalso grille
@@ -47,7 +47,7 @@ static inline void set_morte(int i, int j, grille g){g.cellules[i][j] = 0;}
 *\param c int nombre de colonnes
 *\param *g grille
 *\return \c void teste si la cellule (i,j) de la grille g est vivante */
-static inline int est_vivante(int i, int j, grille g){return g.cellules[i][j] != 0;}
+static inline int est_vivante(int i, int j, grille g){return (g.cellules[i][j] != 0)&&(g.cellules[i][j] != -1);}
 
 
 void copie_grille (grille gs, grille gd);

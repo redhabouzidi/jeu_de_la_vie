@@ -3,7 +3,7 @@
  * code pour la grille
  *\author Redha Bouzidi
  */
-#include "grille.h"
+#include "../include/grille.h"
 /**
 *\fn void init_grille_from_file (char * filename, grille* g)
 *\relatesalso grille
@@ -28,6 +28,12 @@ void init_grille_from_file (char * filename, grille* g){
 		fscanf(pfile, "%d", & i);
 		fscanf(pfile, "%d", & j);
 		set_vivante(i,j,*g);
+	}
+	fscanf(pfile, "%d", & vivantes);
+	for (n=0; n< vivantes; ++n){
+		fscanf(pfile, "%d", & i);
+		fscanf(pfile, "%d", & j);
+		g->cellules[i][j]=-1;
 	}
 
 	fclose (pfile);

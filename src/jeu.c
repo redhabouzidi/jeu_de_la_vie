@@ -3,7 +3,7 @@
  * code pour la fonctionalité de jeu
  *\author Redha Bouzidi
  */
-#include "jeu.h"
+#include "../include/jeu.h"
 /**
 *\fn int compte_voisins_vivants (int i, int j, grille g)
 *\relatesalso grille
