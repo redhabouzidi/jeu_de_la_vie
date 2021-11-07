@@ -1,17 +1,28 @@
-bin/main : grille.o io.o jeu.o main.o
-	gcc -o bin/main obj/grille.o obj/io.o obj/jeu.o obj/main.o 
-grille.o: src/grille.c include/grille.h 
-	gcc -c -o obj/grille.o src/grille.c 
-io.o: src/io.c include/io.h include/grille.h include/jeu.h 
-	cd obj
-	gcc -c -o obj/io.o src/io.c 
-jeu.o: src/jeu.c include/jeu.h include/grille.h 
-	cd obj
-	gcc -c -o obj/jeu.o src/jeu.c 
-main.o: include/io.h include/grille.h include/jeu.h src/main.c 
-	cd obj
-	gcc -c -o obj/main.o src/main.c 
-make clean:
-	rm obj/*.o bin/main
+CC = gcc
+HPATH = include/
+OPATH = obj/
+CPATH = src/
+CFLAGS = -g -W -Wall
+OBJECTS =  obj/main.o obj/grille.o obj/io.o obj/jeu.o
+vpath %.o obj/
+vpath %.c src/
+vpath %.h include/
+vpath main bin/
+
+main : $(OBJECTS)
+	$(CC) $(CFLAGS) -o bin/main $(OBJECTS)
+main.o :
+grille.o : grille.h
+jeu.o : jeu.h grille.h
+io.o : io.h jeu.h grille.h
+obj/%.o : %.c
+	gcc $(DEFINE) $(CFLAGS) -c -o $@ $<
+
+
+clean :
+	rm bin/* obj/*.o RedhaBouzidi-TP3-2.0.tar.xz
 make dist:
-	tar -jcvf RedhaBouzidi-TP3-2.0.tar.xz grille.c grille.h main.c io.c io.h jeu.c jeu.h
+	tar -jcvf RedhaBouzidi-TP3-2.0.tar.xz $(CPATH)grille.c $(OPATH)grille.h $(CPATH)main.c $(CPATH)io.c $(OPATH)io.h $(CPATH)jeu.c $(OPATH)jeu.h
+make docs:
+	doxygen Doxyfile
+
