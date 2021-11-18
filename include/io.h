@@ -11,6 +11,7 @@
 #include "jeu.h"
 
 
+void paint(cairo_surface_t *surface);
 
 void affiche_trait (int c);
 

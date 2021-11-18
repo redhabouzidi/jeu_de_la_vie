@@ -10,7 +10,7 @@ vpath %.h include/
 vpath main bin/
 
 main : $(OBJECTS)
-	$(CC) $(CFLAGS) -o bin/main $(OBJECTS) 
+	$(CC) $(CFLAGS) -o  bin/main $(OBJECTS) -lcairo -lm -Iinclude -I/usr/include/cairo -lX11
 main.o :
 grille.o : grille.h
 jeu.o : jeu.h grille.h
@@ -27,7 +27,7 @@ make docs:
 	doxygen Doxyfile
 cairo: obj/cairo.o
 	
-	gcc -o cairo obj/cairo.o -lcairo -lm -Iinclude -I/usr/include/cairo -lX11
+	gcc -o cairo obj/cairo.o  -lcairo -lm -Iinclude -I/usr/include/cairo -lX11
 	
 src/cairo.o:src/cairo.c
 	gcc -c -o obj/cairo.o src/cairo.c

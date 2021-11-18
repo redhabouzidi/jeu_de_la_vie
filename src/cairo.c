@@ -10,29 +10,34 @@
 int a=100;
 void paint(cairo_surface_t *surface)
 {
+	int i=0,j=0,l=10,c=10;
 	// create cairo mask
-	cairo_t *cr;
-	cr=cairo_create(surface);
-
+	cairo_t *dr[l][c];
+	dr[i][j]=cairo_create(surface);
+	
 	// background
-	cairo_set_source_rgb (cr, 0.0, 0.0, 1.0);
-	cairo_paint(cr);
+	cairo_set_source_rgb (dr[i][j], 0.0, 0.0, 0.0);
+	cairo_paint(dr[i][j]);
 	
 	// line
-	cairo_set_source_rgb (cr, 1.0, 0.0, 0.0);
-	cairo_move_to (cr, 10.0, 50.0);
-	cairo_line_to(cr, 100.0,50.0);
-	cairo_set_line_width (cr, 1);
-	cairo_stroke (cr);
+	
+	
+	
 
-	// filled rectangle
-	cairo_rectangle(cr,a,30,50,50);
-	cairo_set_source_rgb (cr, 0.0, 1.0, 0.0);
-	cairo_fill(cr);	
-
-	cairo_destroy(cr); // destroy cairo mask
+	// filled rectangle // destroy cairo mask
+	for(i=0;i<l;i++){
+	for(j=0;j<c;j++){
+	dr[i][j]=cairo_create(surface);
+	cairo_rectangle(dr[i][j],(10+60*i),(10+60*j),50,50);
+	cairo_set_source_rgb (dr[i][j], 1, 0, 1);
+	cairo_fill(dr[i][j]);	
+	cairo_destroy(dr[i][j]);
+	
+	}
+	}
+	
+	
 }
-
 
 
 
@@ -68,7 +73,6 @@ int main (int argc, char *argv[]){
 	while(1) {
 		XNextEvent(dpy, &e);
 		if(e.type==Expose && e.xexpose.count<1) {
-		
 			paint(cs);
 		} else if(e.type==ButtonPress) break;
 	}

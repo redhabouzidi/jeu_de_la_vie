@@ -4,6 +4,11 @@
  *\author Redha Bouzidi
  */
 #include "../include/io.h"
+#include </usr/include/cairo/cairo.h>
+#include </usr/include/cairo/cairo-xlib.h>
+#include <X11/Xlib.h>
+#define SIZEX 6000
+#define SIZEY 10000
 /**
 *\fn void affiche_trait (int c)
 *\param c int nombre de colonnes
@@ -52,18 +57,67 @@ void affiche_ligne (int c, int* ligne){
 *\param g grille
 *\return \c void affiche la grille*/
 void affiche_grille (grille g){
-	int i, l=g.nbl, c=g.nbc;
-	printf("\nAge grille:%d",ageevo);
-	printf("\n");
-	affiche_trait(c);
-	for (i=0; i<l; ++i) {
-		affiche_ligne(c, g.cellules[i]);
-		affiche_trait(c);
+	// X11 display
+	Display *dpy;
+	Window rootwin;
+	Window win;
+	XEvent e;
+	int scr;
+	
+	// init the display
+	if(!(dpy=XOpenDisplay(NULL))) {
+		fprintf(stderr, "ERROR: Could not open display\n");
+		exit(1);
 	}
-	printf("\n");
-	return;
-}
 
+	scr=DefaultScreen(dpy);
+	rootwin=RootWindow(dpy, scr);
+
+	win=XCreateSimpleWindow(dpy, rootwin, 1, 1, SIZEX, SIZEY, 0, 
+			BlackPixel(dpy, scr), BlackPixel(dpy, scr));
+
+	XStoreName(dpy, win, "jeu de la vie");
+	XSelectInput(dpy, win, ExposureMask|ButtonPressMask);
+	XMapWindow(dpy, win);
+	
+	// create cairo surface
+	cairo_surface_t *cs; 
+	cs=cairo_xlib_surface_create(dpy, win, DefaultVisual(dpy, 0), SIZEX, SIZEY);
+
+	// run the event loop
+			paint(cs);
+
+	cairo_surface_destroy(cs); // destroy cairo surface
+	XCloseDisplay(dpy); // close the display
+	return ;
+}
+void paint(cairo_surface_t *surface)
+{
+	int i=0,j=0,l=10,c=10;
+	// create cairo mask
+	cairo_t *dr[l][c];
+	dr[i][j]=cairo_create(surface);
+	
+	// background
+	cairo_set_source_rgb (dr[i][j], 0.0, 0.0, 0.0);
+	cairo_paint(dr[i][j]);
+	
+	// line
+	
+	
+	
+
+	// filled rectangle // destroy cairo mask
+	for(i=0;i<l;i++){
+	for(j=0;j<c;j++){
+	dr[i][j]=cairo_create(surface);
+	cairo_rectangle(dr[i][j],(10+60*i),(10+60*j),50,50);
+	cairo_set_source_rgb (dr[i][j], 0, 0, 1);
+	cairo_fill(dr[i][j]);	
+	cairo_destroy(dr[i][j]);
+	}
+	}
+}
 /** effacement d'une grille*/
 void efface_grille (grille g){
     system("clear ");
