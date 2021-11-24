@@ -4,40 +4,32 @@
 #include </usr/include/cairo/cairo-xlib.h>
 #include <X11/Xlib.h>
 
-#define SIZEX 6000
-#define SIZEY 10000
-
-int a=100;
-void paint(cairo_surface_t *surface)
-{
-	int i=0,j=0,l=10,c=10;
+#define SIZEX 1920
+#define SIZEY 1024
+cairo_surface_t *cs;
+void paint()
+{	int i,j;
 	// create cairo mask
-	cairo_t *dr[l][c];
-	dr[i][j]=cairo_create(surface);
-	
-	// background
-	cairo_set_source_rgb (dr[i][j], 0.0, 0.0, 0.0);
-	cairo_paint(dr[i][j]);
-	
-	// line
-	
-	
-	
+	cairo_t *cr;
+	cr=cairo_create(cs);
 
-	// filled rectangle // destroy cairo mask
-	for(i=0;i<l;i++){
-	for(j=0;j<c;j++){
-	dr[i][j]=cairo_create(surface);
-	cairo_rectangle(dr[i][j],(10+60*i),(10+60*j),50,50);
-	cairo_set_source_rgb (dr[i][j], 1, 0, 1);
-	cairo_fill(dr[i][j]);	
-	cairo_destroy(dr[i][j]);
+	// background
+	cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
+	cairo_paint(cr);
+	
+	// filled rectangle
+	for(i=0;i<10;i++){
+	for(j=0;j<10;j++){
+	cairo_rectangle(cr,(10+60*i),(10+60*j),50,50);
+	cairo_set_source_rgb (cr, 0.0, 1.0, 0.0);
+	cairo_fill(cr);	
+	
 	
 	}
 	}
-	
-	
+	cairo_destroy(cr); // destroy cairo mask
 }
+
 
 
 
@@ -62,11 +54,10 @@ int main (int argc, char *argv[]){
 			BlackPixel(dpy, scr), BlackPixel(dpy, scr));
 
 	XStoreName(dpy, win, "jeu de la vie");
-	XSelectInput(dpy, win, ExposureMask|ButtonPressMask);
+	XSelectInput(dpy, win, KeyPressMask|KeyReleaseMask|ExposureMask|ButtonPressMask);
 	XMapWindow(dpy, win);
 	
 	// create cairo surface
-	cairo_surface_t *cs; 
 	cs=cairo_xlib_surface_create(dpy, win, DefaultVisual(dpy, 0), SIZEX, SIZEY);
 
 	// run the event loop
@@ -74,11 +65,13 @@ int main (int argc, char *argv[]){
 		XNextEvent(dpy, &e);
 		if(e.type==Expose && e.xexpose.count<1) {
 			paint(cs);
-		} else if(e.type==ButtonPress) break;
+		} else if(e.type ==KeyPress||e.type==ButtonPress) {
+		printf("%d\n",e.xkey.keycode);
+		break;
+		}
 	}
 
 	cairo_surface_destroy(cs); // destroy cairo surface
 	XCloseDisplay(dpy); // close the display
 	return 0;
 }
-
