@@ -9,15 +9,12 @@
 #include <stdio.h>
 #include "grille.h"
 #include "jeu.h"
-#include </usr/include/cairo/cairo.h>
-#include </usr/include/cairo/cairo-xlib.h>
-#include <X11/Xlib.h>
 
 
-void affiche_trait (int c,int j,cairo_t *cr);
+void affiche_trait (int c);
 
 
-void affiche_ligne (int c,int j, int* ligne,cairo_t *cr);
+void affiche_ligne (int c, int* ligne);
 
 
 void affiche_grille (grille g);

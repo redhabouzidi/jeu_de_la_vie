@@ -18,11 +18,11 @@ int main (int argc, char ** argv) {
 		return 1;
 	}
     voisin=&compte_voisins_vivants;
-    fage=NULL;
+    	fage=NULL;
 	grille g, gc;
 	init_grille_from_file(argv[1],&g);
 	alloue_grille (g.nbl, g.nbc, &gc);
-
+	affiche_grille(g);
 	debut_jeu(&g, &gc);
 
 	libere_grille(&g);
