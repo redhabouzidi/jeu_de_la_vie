@@ -17,6 +17,10 @@
 */
 static inline int modulo(int i, int m) {return (i+m)%m;}
 
+int test_oc(grille g);
+
+int test_eg(grille g,grille gc);
+
 void vieillir_cel(grille* g);
 
 int compte_voisins_vivants (int i, int j, grille g);
@@ -25,4 +29,8 @@ int compte_voisins_vivants_nc (int i, int j, grille g);
 
 void evolue (grille *g, grille *gc);
 
+int pas_oc;
+int delai_oc;
+
+int (*foc)(grille g);
 #endif

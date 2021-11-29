@@ -18,6 +18,7 @@ int main (int argc, char ** argv) {
 		return 1;
 	}
     voisin=&compte_voisins_vivants;
+    	foc=NULL;
     	fage=NULL;
 	grille g, gc;
 	init_grille_from_file(argv[1],&g);
