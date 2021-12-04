@@ -28,9 +28,8 @@ int compte_voisins_vivants (int i, int j, grille g);
 int compte_voisins_vivants_nc (int i, int j, grille g);
 
 void evolue (grille *g, grille *gc);
-
-int pas_oc;
-int delai_oc;
-
-int (*foc)(grille g);
+/** Variable globale deffinissant le pas de l'oscillation */
+extern int pas_oc;
+/** Variable globale deffinissant le delai de l'oscillation */
+extern int delai_oc;
 #endif

@@ -56,5 +56,5 @@ int (*voisin) (int, int, grille);
 /** Variable globale permetant d'activer ou de désactiver le vieillissement */
 void (*fage)(grille*);
 /** Variable globale permetant d'incrementer le temps d'evolution */
-int ageevo;
+extern int ageevo;
 #endif

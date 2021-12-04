@@ -4,7 +4,7 @@ HPATH = include/
 CPATH = src/
 CFLAGS = -g -W -Wall
 EXEC=main
-OBJECTS =  $(MAIN) grille.o $(IO) jeu.o
+OBJECTS =  $(MAIN) $(IO) libjeu.a
 vpath %.c src
 vpath %.o obj
 vpath %.h include
@@ -19,17 +19,25 @@ MAIN=cairo.o
 IO=io_cairo.o
 endif
 
-$(EXEC) :$(OBJECTS)
+$(EXEC) :$(MAIN) $(IO) libjeu.a
+	mkdir $(OPATH)
+	mkdir bin
+	mv *.o $(OPATH)
 	$(CC) $(CFLAGS) -o  bin/$@  obj/$(MAIN) obj/grille.o obj/$(IO) obj/jeu.o $(CPPFLAGS)
+	
+libjeu.a:grille.o jeu.o
+	ar -crv libjeu.a grille.o jeu.o
+	ranlib libjeu.a
+	mkdir lib
+	mv libjeu.a lib/
 grille.o: grille.h
 io.o:io.h
 jeu.o:jeu.h
 %.o : %.c
-	gcc  $(CFLAGS) -c  -o $(OPATH)$@ $<
+	gcc  $(CFLAGS) -Iinclude -c  -o $@ $<
 clean :
-	rm bin/* obj/*.o 
-	rm RedhaBouzidi-TP3-2.0.tar.xz
+	rm -f -r bin obj lib
 dist:
-	tar -jcvf RedhaBouzidi-TP3-2.0.tar.xz $(CPATH)grille.c $(OPATH)grille.h $(CPATH)main.c $(CPATH)io.c $(OPATH)io.h $(CPATH)jeu.c $(OPATH)jeu.h
+	tar -jcvf RedhaBouzidi-TP3-2.0.tar.xz $(CPATH)grille.c $(HPATH)grille.h $(CPATH)main.c $(CPATH)io.c $(HPATH)io.h $(CPATH)jeu.c $(HPATH)jeu.h
 docs:
 	doxygen Doxyfile

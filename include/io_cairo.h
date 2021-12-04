@@ -3,8 +3,8 @@
  * header pour les fonctions d'affichage et de choix
  *\author Redha Bouzidi
  */
-#ifndef __IO_H
-#define __IO_H
+#ifndef __IO_CAIRO_H
+#define __IO_CAIRO_H
 #include </usr/include/cairo/cairo.h>
 #include </usr/include/cairo/cairo-xlib.h>
 #include <X11/Xlib.h>

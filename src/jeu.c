@@ -27,22 +27,13 @@ int compte_voisins_vivants (int i, int j, grille g){
 
 	return v;
 }
+
+
 /**
-*\fn void vieillir_cel(grille* g)
-*\relatesalso grille
-*\param *g grille
-\return \c void incremente les cellules vivantes et les remets a 0 quand elles dépassent l'age 8
-*/
-int grille_vide(grille g){
-	int i,j;
-	for(i=0;i<g.nbl;i++){
-		for(j=0;j<g.nbl;j++){
-		if(est_vivante(i,j,g))
-		return 0;
-		}
-	}
-	return 1;
-}
+*\fn test_oc
+*\param grille g
+*\return int Si 1 alors oscillante , si 0 alors non oscillante
+*/ 
 int test_oc(grille g){
 	int i,j;
 	grille gc;
@@ -52,31 +43,37 @@ int test_oc(grille g){
 	grille gi;
 	alloue_grille (g.nbl, g.nbc, &gi);
 	copie_grille (g,gc);
-	for(i=0;i<100;i++){
+	for(i=0;i<50;i++){
 		copie_grille (gc,gc1);
-		for(j=0;j<100;j++){
+		for(j=0;j<50;j++){
 		evolue(&gc1,&gi);
-		if(grille_vide(gc1))
-			break;
 		
 		if(test_eg(gc,gc1)){
-			pas_oc=j;
+			pas_oc=j+1;
 			delai_oc=i;
-		return 1;
+			libere_grille (&gc);
+			libere_grille (&gc1);
+			libere_grille (&gi);
+			return 1;
 		}
 		
-	
 		}
 	evolue(&gc,&gi);
-	if(grille_vide(gc))
-			break;
 	
 	}
 	delai_oc=-1;
 	pas_oc=-1;
+	libere_grille (&gc);
+	libere_grille (&gc1);
+	libere_grille (&gi);
 	return 0;
 }
-
+/**
+*\fn void vieillir_cel(grille* g)
+*\relatesalso grille
+*\param *g grille
+\return \c void incremente les cellules vivantes et les remets a 0 quand elles dépassent l'age 8
+*/
 void vieillir_cel(grille* g){
 int l,c;
     for(l=0;l<g->nbl;l++){
@@ -101,79 +98,41 @@ int l,c;
 */
 int compte_voisins_vivants_nc (int i, int j, grille g){
 	int v = 0, l=g.nbl, c = g.nbc;
-	if(i+1==l){
-    if(j+1==c){
-    v+= est_vivante(i-1,j-1,g);
-	v+= est_vivante(i-1,j,g);
-	v+= est_vivante(i,j-1,g);
-    }else if(j==0){
-	v+= est_vivante(i-1,j,g);
-	v+= est_vivante(i-1,j+1,g);
-	v+= est_vivante(i,j+1,g);
-    }else{
-    v+= est_vivante(i-1,j-1,g);
-	v+= est_vivante(i-1,j,g);
-	v+= est_vivante(i-1,j+1,g);
-	v+= est_vivante(i,j-1,g);
-	v+= est_vivante(i,j+1,g);
-    }
-    }else if(i==0){
-	if(j+1==c){
-    v+= est_vivante(i,j-1,g);
-	v+= est_vivante(i+1,j-1,g);
+	if(i+1<l){
 	v+= est_vivante(i+1,j,g);
-	}else if(j==0){
-	v+= est_vivante(i,j+1,g);
-	v+= est_vivante(i+1,j,g);
+	if(j+1<c)
 	v+= est_vivante(i+1,j+1,g);
-	}else{
-	v+= est_vivante(i,j-1,g);
-	v+= est_vivante(i,j+1,g);
+	if(j-1>=0)
 	v+= est_vivante(i+1,j-1,g);
-	v+= est_vivante(i+1,j,g);
-	v+= est_vivante(i+1,j+1,g);
 	}
-    }else if(j+1==c){
-    v+= est_vivante(i-1,j-1,g);
-	v+= est_vivante(i-1,j,g);
-	v+= est_vivante(i,j-1,g);
-	v+= est_vivante(i+1,j-1,g);
-	v+= est_vivante(i+1,j,g);
-    }else if(j==0){
-	v+= est_vivante(i-1,j,g);
-	v+= est_vivante(i-1,j+1,g);
+	if(j+1<c)
 	v+= est_vivante(i,j+1,g);
-	v+= est_vivante(i+1,j,g);
-	v+= est_vivante(i+1,j+1,g);
-    }else{
+	if(j-1>0)
+	v+= est_vivante(i,j-1,g);
+	if(i-1>=0){
+	if(j-1>=0)
 	v+= est_vivante(i-1,j-1,g);
-	v+= est_vivante(i-1,j,g);
+	if(j+1<c)
 	v+= est_vivante(i-1,j+1,g);
-	v+= est_vivante(i,j-1,g);
-	v+= est_vivante(i,j+1,g);
-	v+= est_vivante(i+1,j-1,g);
-	v+= est_vivante(i+1,j,g);
-	v+= est_vivante(i+1,j+1,g);
-
+	v+= est_vivante(i-1,j,g);
 	}
 	return v;
 }
 
+/**
+*\fn test_eg(grille g,grille gc)
+*\param g grille
+*\param gc grille
+*\return int 1 si les deux grilles sont égales 0 si les deux grille ne sont pas identiques
+*/
 int test_eg(grille g,grille gc){
 	int i,j,r=0;
 	for(i=0;i<g.nbl;i++){
 		for(j=0;j<g.nbc;j++){
-		if(est_vivante(i,j,g)){
-			if(est_vivante(i,j,gc)){
-				r=1;
-			}else{
-			return 0;
-			}
-		}
-		if(est_vivante(i,j,gc)){
-			if(!est_vivante(i,j,g)){
-			return 0;
-			}
+		if(g.cellules[i][j]==gc.cellules[i][j])
+		r=1;
+		else{
+		return 0;
 		}
 		}
 	}
@@ -190,7 +149,7 @@ int test_eg(grille g,grille gc){
 */
 
 void evolue (grille *g, grille *gc){
-
+	
 	copie_grille (*g,*gc); // copie temporaire de la grille
 	int i,j,l=g->nbl, c = g->nbc,v;
 

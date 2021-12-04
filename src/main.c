@@ -8,7 +8,9 @@
 #include "../include/grille.h"
 #include "../include/io.h"
 #include "../include/jeu.h"
-
+	pas_oc=0;
+	delai_oc=0;
+	ageevo=0;
 
 
 int main (int argc, char ** argv) {
@@ -18,7 +20,6 @@ int main (int argc, char ** argv) {
 		return 1;
 	}
     	voisin=&compte_voisins_vivants;
-    	foc=NULL;
     	fage=NULL;
 	grille g, gc;
 	init_grille_from_file(argv[1],&g);

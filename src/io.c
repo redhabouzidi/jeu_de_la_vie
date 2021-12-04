@@ -61,8 +61,28 @@ void affiche_grille (grille g){
 		affiche_trait(c);
 	}
 	printf("\n");
+	if(fage==NULL)
+		printf("Vieillissement : OFF\n");
+	else
+		printf("Vieillissement : ON\n");
+	
+	if(voisin==compte_voisins_vivants)
+		printf("Cyclique : ON\n");
+	else
+		printf("Cyclique : OFF\n");
+	
+		if(pas_oc==0){
+		printf("Appuyez sur O pour test l'oscillation\n");
+		}else if(pas_oc!=-1){
+		printf("Le pas est de : %d ",pas_oc);
+		if(delai_oc!=0)
+			printf("et le delai est de  : %d",delai_oc);
+		}else
+		printf("La fonction n'ocille pas");
+		
+	
 	return;
-}
+}	
 
 /** effacement d'une grille*/
 void efface_grille (grille g){
@@ -75,16 +95,21 @@ void efface_grille (grille g){
 *\param *g grille
 */
 void debut_jeu(grille *g, grille *gc){
+	char vide;
 	char c = getchar();
+	if(c!='\n'){
+		do{
+		vide=getchar();
+		}while(vide!='\n');
+		}
 	while (c != 'q') // touche 'q' pour quitter
 	{
 		switch (c) {
 			case '\n' :
 			{ // touche "entree" pour évoluer
+				printf("yo");
 				evolue(g,gc);
 				ageevo++;
-				efface_grille(*g);
-				affiche_grille(*g);
 				break;
 			}
 			case 'c':{
@@ -93,7 +118,6 @@ void debut_jeu(grille *g, grille *gc){
                 }else{
                 voisin=&compte_voisins_vivants;
                 }
-                fflush(stdin);
                 break;
 			}
 			case 'v':{
@@ -102,23 +126,30 @@ void debut_jeu(grille *g, grille *gc){
                 }else{
                 fage=NULL;
                 }
-                fflush(stdin);
                 break;
 			}
 			case 'n':{
-			    ageevo=0;
-			    libere_grille(g);
-			    libere_grille(gc);
+			pas_oc=0;
+			delai_oc=0;
+			ageevo=0;
+			libere_grille(g);
+			libere_grille(gc);
 
-            char string[255];
-            scanf("%s",string);
+			char string[255];
+			scanf("%s",string);
+			do{
+			vide=getchar();
+			}while(vide!='\n');
+		
 			init_grille_from_file(string,g);
 			alloue_grille(g->nbl,g->nbc,gc);
-			system("cls");
-			affiche_grille(*g);
-			fflush(stdin);
 			break;
 
+			}
+			case 'o':{
+			test_oc(*g);
+			break;
+			
 			}
 			default :
 			{ // touche non traitée
@@ -126,7 +157,15 @@ void debut_jeu(grille *g, grille *gc){
 				break;
 			}
 		}
+		efface_grille(*g);
+		affiche_grille(*g);
 		c = getchar();
+		if(c!='\n'){
+		do{
+		vide=getchar();
+		}while(vide!='\n');
+		}
+		
 	}
 	return;
 }

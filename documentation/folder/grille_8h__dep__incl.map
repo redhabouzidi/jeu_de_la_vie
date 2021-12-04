@@ -1,0 +1,11 @@
+<map id="include/grille.h" name="include/grille.h">
+<area shape="rect" id="node1" title=" " alt="" coords="242,5,347,32"/>
+<area shape="rect" id="node2" href="$io__cairo_8h.html" title=" " alt="" coords="5,155,128,181"/>
+<area shape="rect" id="node4" href="$jeu_8h.html" title=" " alt="" coords="247,80,342,107"/>
+<area shape="rect" id="node5" href="$io_8h.html" title=" " alt="" coords="152,155,240,181"/>
+<area shape="rect" id="node7" href="$main_8c.html" title=" " alt="" coords="332,229,415,256"/>
+<area shape="rect" id="node9" href="$grille_8c.html" title=" " alt="" coords="461,80,544,107"/>
+<area shape="rect" id="node3" href="$io__cairo_8c.html" title=" " alt="" coords="17,229,117,256"/>
+<area shape="rect" id="node8" href="$jeu_8c.html" title=" " alt="" coords="264,155,336,181"/>
+<area shape="rect" id="node6" href="$io_8c.html" title=" " alt="" coords="163,229,229,256"/>
+</map>
